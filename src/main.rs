@@ -184,14 +184,24 @@ fn ctrl_keybinding(direction: &Direction) -> String {
 }
 
 fn alt_keybinding(direction: &Direction) -> String {
-    let mut char_vec: Vec<char> = vec![0x1b as char];
-    char_vec.push(match direction {
-        Direction::Left => 'h',
-        Direction::Right => 'l',
-        Direction::Up => 'k',
-        Direction::Down => 'j',
-    });
-    char_vec.iter().collect()
+    let direction = match direction {
+        Direction::Left => "\u{1b}!",
+        Direction::Up => "\u{1b}@",
+        Direction::Right => "\u{1b}#",
+        Direction::Down => "\u{1b}$",
+    };
+    direction.to_string()
+    // String::from_utf8(vec![27, 91, 49, 59, 50, 49]).unwrap()
+    // &[0x1B, b'!']
+    // "\u{1b}!".to_string()
+    // let mut char_vec: Vec<char> = vec![0x1b as char];
+    // char_vec.push(match direction {
+    //     Direction::Left => 'h',
+    //     Direction::Right => 'l',
+    //     Direction::Up => 'k',
+    //     Direction::Down => 'j',
+    // });
+    // char_vec.iter().collect()
 }
 
 fn string_to_direction(s: &str) -> Option<Direction> {
